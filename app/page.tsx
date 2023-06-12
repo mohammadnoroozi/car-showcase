@@ -10,7 +10,7 @@ import { ClipLoader } from 'react-spinners';
 export default function Home() {
 
   const [allCars, setAllCars] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // search states
   const [manufacturer, setManufacturer] = useState("");
