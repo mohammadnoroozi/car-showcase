@@ -5,6 +5,7 @@ import { fuels, yearsOfProduction } from '@/constants';
 import { fetchCars } from '@/utils'
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 export default function Home() {
 
@@ -67,24 +68,22 @@ export default function Home() {
           </div>
         </div>
 
-        {allCars.length > 0 ? (
+        {loading && !allCars.length ? (
+          <div className='flex justify-center m-16'>
+            <ClipLoader color="rgb(43,89,255)" />
+          </div>
+        ) : allCars.length > 0 ? (
           <section>
             <div className='home__cars-wrapper'>
               {allCars?.map(car => <CarCard car={car} />)}
             </div>
-
-            {loading && (
-              <div className='mt-16 w-full flex-center'>
-                <Image
-                  src={"/loader.svg"}
-                  width={50}
-                  height={50}
-                  alt='loader'
-                  className='object-contain'
-                />
-              </div>
-            )}
-
+            {
+              loading && (
+                <div className='flex justify-center m-16'>
+                  <ClipLoader color="rgb(43,89,255)" />
+                </div>
+              )
+            }
             <ShowMore
               pageNumber={limit / 10}
               isNext={limit > allCars.length}
